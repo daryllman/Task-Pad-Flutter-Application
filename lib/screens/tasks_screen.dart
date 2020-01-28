@@ -1,17 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:task_pad_flutter_app/widgets/tasks_list.dart';
 import 'package:task_pad_flutter_app/screens/add_task_screen.dart';
+import 'package:task_pad_flutter_app/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:task_pad_flutter_app/models/task_data.dart';
 
 class TasksScreen extends StatelessWidget {
-  Widget buildBottomSheet(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text('this is a bottom sheet'),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +18,9 @@ class TasksScreen extends StatelessWidget {
           showModalBottomSheet(
             context: context,
             isScrollControlled: true,
-            builder: (context) => SingleChildScrollView(child: AddTaskScreen()),
+            builder: (context) => SingleChildScrollView(
+              child: AddTaskScreen(),
+            ),
           );
         },
         backgroundColor: Colors.lightBlueAccent,
@@ -55,7 +53,7 @@ class TasksScreen extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '12 Tasks',
+                  '${Provider.of<TaskData>(context).taskCount} Tasks',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 18.0,
